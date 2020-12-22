@@ -30,5 +30,21 @@ const processPdf = async (filePath) => {
   });
 };
 
-processPdf("./invoice_2001321.pdf").then((text) => console.log(text));
-processPdf("./invoice_2001321.png").then((text) => console.log(text));
+const regex = /ust/gi;
+
+const extractVatId = (text) => {
+  return text
+    .split("\n")
+    .filter((line) => line.match(regex))
+    .map((line) => {
+      const index = line.match(regex).index;
+      return line.substr(index).match(/\d+/)[0];
+    });
+};
+
+processPdf("./invoice_2001321.pdf").then((text) =>
+  console.log(extractVatId(text))
+);
+processPdf("./invoice_2001321.png").then((text) =>
+  console.log(extractVatId(text))
+);
