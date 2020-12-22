@@ -30,7 +30,7 @@ const processPdf = async (filePath) => {
   });
 };
 
-const regex = /ust/gi;
+const regex = /ust|Steuernummer/gi;
 
 const extractVatId = (text) => {
   return text
@@ -42,9 +42,9 @@ const extractVatId = (text) => {
     });
 };
 
-processPdf("./invoice_2001321.pdf").then((text) =>
+processPdf("./4854976e-a1a6-4171-b975-a97b537afd54.pdf").then((text) =>
   console.log(extractVatId(text))
 );
-processPdf("./invoice_2001321.png").then((text) =>
-  console.log(extractVatId(text))
-);
+// processPdf("./invoice_2001321.png").then((text) =>
+//   console.log(extractVatId(text))
+// );
